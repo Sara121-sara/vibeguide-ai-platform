@@ -47,13 +47,24 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims();
   const user = data?.claims;
 
-  if (
-    request.nextUrl.pathname !== "/" &&
-    !user &&
-    !request.nextUrl.pathname.startsWith("/login") &&
-    !request.nextUrl.pathname.startsWith("/auth")
-  ) {
-    // no user, potentially respond by redirecting the user to the login page
+  // 如果用户已登录，确保数据库中有用户记录
+  // 注意：在中间件中使用数据库操作可能会影响性能，这里暂时注释掉
+  // if (user && user.sub && user.email) {
+  //   try {
+  //     const { ensureUserExists } = await import('@/lib/auth/user-management');
+  //     await ensureUserExists({ id: user.sub, email: user.email });
+  //   } catch (error) {
+  //     console.error('Failed to create user record:', error);
+  //   }
+  // }
+
+  // 保护需要认证的路由
+  const protectedPaths = ["/projects", "/my"];
+  const isProtectedPath = protectedPaths.some(path => 
+    request.nextUrl.pathname.startsWith(path)
+  );
+  
+  if (isProtectedPath && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/auth/login";
     return NextResponse.redirect(url);
