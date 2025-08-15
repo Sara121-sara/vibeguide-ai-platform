@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-async function handleCheckoutSessionCompleted(session: any) {
+async function handleCheckoutSessionCompleted(session: { metadata: any; customer_email?: string }) {
   const { userId, planId, credits } = session.metadata;
 
   if (!userId || !credits) {

@@ -39,7 +39,7 @@ export async function createProject(data: {
   step1Data?: string;
   step2Data?: string;
   requirements?: string;
-  documents?: any;
+  documents?: Record<string, any>;
 }) {
   return await db.insert(projects).values(data).returning();
 }
@@ -54,7 +54,7 @@ export async function updateProject(id: string, data: Partial<{
   step1Data: string;
   step2Data: string;
   requirements: string;
-  documents: any;
+  documents: Record<string, any>;
   status: string;
 }>) {
   return await db.update(projects)

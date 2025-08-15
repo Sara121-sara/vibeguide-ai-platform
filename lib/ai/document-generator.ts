@@ -162,11 +162,11 @@ export async function generateDocuments(projectDescription: string, requirements
         key: docType.key,
         content: completion.choices[0].message.content || `# ${docType.name}\n\n生成失败，请重试。`
       };
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error(`生成${docType.name}失败:`, error);
       
       // 检查是否是402错误（点数不足）
-      if (error.status === 402) {
+      if (error && typeof error === 'object' && 'status' in error && error.status === 402) {
         throw new Error('OPENROUTER_CREDITS_INSUFFICIENT');
       }
       

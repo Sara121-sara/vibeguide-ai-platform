@@ -76,11 +76,11 @@ export async function generateAIDocuments(step1Data: string, step2Data: string) 
     await updateUserCredits(user.id, userData.credits - 1);
 
     return { success: true, documents };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('生成文档失败:', error);
     
     // 检查是否是OpenRouter点数不足
-    if (error.message === 'OPENROUTER_CREDITS_INSUFFICIENT') {
+    if (error instanceof Error && error.message === 'OPENROUTER_CREDITS_INSUFFICIENT') {
       return { 
         success: false, 
         error: 'OpenRouter API点数不足，请先充值OpenRouter账户', 
@@ -97,7 +97,7 @@ export async function saveProject(projectData: {
   description: string;
   step1Data: string;
   step2Data: string;
-  documents: any;
+  documents: { key: string; content: string }[];
   projectId?: string;
 }) {
   try {

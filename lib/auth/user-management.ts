@@ -1,6 +1,6 @@
 import { createUser, getUserById } from '@/lib/db/queries';
 
-export async function ensureUserExists(supabaseUser: any) {
+export async function ensureUserExists(supabaseUser: { id: string; email?: string }) {
   if (!supabaseUser) return null;
 
   try {

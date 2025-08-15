@@ -97,9 +97,9 @@ function generateZPaySign(params: Record<string, string | number>): string {
   // 这里应该根据ZPay的签名算法实现
   // 通常是将参数按字典序排列，拼接后用密钥做MD5或SHA1签名
   const sortedKeys = Object.keys(params).sort();
-  const _signStr = sortedKeys
-    .map(key => `${key}=${params[key]}`)
-    .join('&') + process.env.NEXT_PUBLIC_ZPAY_PKEY;
+  // const signStr = sortedKeys
+  //   .map(key => `${key}=${params[key]}`)
+  //   .join('&') + process.env.NEXT_PUBLIC_ZPAY_PKEY;
   
   // 这里需要实际的签名实现，暂时返回一个占位符
   return 'placeholder_sign';
