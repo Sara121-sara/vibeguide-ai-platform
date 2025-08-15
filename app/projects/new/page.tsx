@@ -450,7 +450,7 @@ export default function NewProjectPage() {
 }
 
 // 文档查看器组件
-function DocumentViewer({ documents }: { documents: any }) {
+function DocumentViewer({ documents }: { documents: Record<string, string> }) {
   const [viewMode, setViewMode] = useState<'markdown' | 'preview'>('markdown');
   
   const documentTypes = [
@@ -462,7 +462,7 @@ function DocumentViewer({ documents }: { documents: any }) {
   ];
 
   // 下载单个文档
-  const downloadDocument = (content: string, filename: string) => {
+  const downloadDoc = (content: string, filename: string) => {
     const blob = new Blob([content], { type: 'text/markdown;charset=utf-8' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
@@ -512,7 +512,7 @@ function DocumentViewer({ documents }: { documents: any }) {
                 <Button 
                   size="sm" 
                   variant="outline"
-                  onClick={() => downloadDocument(documents[type.key] || '', type.label)}
+                  onClick={() => downloadDoc(documents[type.key] || '', type.label)}
                 >
                   <Download className="h-3 w-3 mr-1" />
                   下载

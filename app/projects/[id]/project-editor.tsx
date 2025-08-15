@@ -33,7 +33,11 @@ const steps = [
 ];
 
 interface ProjectEditorProps {
-  project: any;
+  project: {
+    id: string;
+    title: string;
+    documents: Record<string, string>;
+  };
 }
 
 export default function ProjectEditor({ project }: ProjectEditorProps) {
@@ -447,7 +451,7 @@ export default function ProjectEditor({ project }: ProjectEditorProps) {
 }
 
 // 文档查看器组件（复用之前的代码）
-function DocumentViewer({ documents, onDownloadAll }: { documents: any, onDownloadAll?: () => void }) {
+function DocumentViewer({ documents, onDownloadAll }: { documents: Record<string, string>, onDownloadAll?: () => void }) {
   const [viewMode, setViewMode] = useState<'markdown' | 'preview'>('markdown');
   
   const documentTypes = [

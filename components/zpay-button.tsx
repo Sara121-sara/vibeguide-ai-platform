@@ -96,7 +96,7 @@ export function ZPayButton({ amount, credits, planName, className }: ZPayButtonP
 function generateZPaySign(params: Record<string, string | number>): string {
   // 这里应该根据ZPay的签名算法实现
   // 通常是将参数按字典序排列，拼接后用密钥做MD5或SHA1签名
-  const sortedKeys = Object.keys(params).sort();
+  // const sortedKeys = Object.keys(params).sort();
   // const signStr = sortedKeys
   //   .map(key => `${key}=${params[key]}`)
   //   .join('&') + process.env.NEXT_PUBLIC_ZPAY_PKEY;

@@ -18,7 +18,7 @@ interface StripeButtonProps {
   className?: string;
 }
 
-export function StripeButton({ amount, credits, planName, planId, className }: StripeButtonProps) {
+export function StripeButton({ planName, planId, className }: Omit<StripeButtonProps, 'amount' | 'credits'>) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
