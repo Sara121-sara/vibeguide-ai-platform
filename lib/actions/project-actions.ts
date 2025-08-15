@@ -10,7 +10,7 @@ import {
   getProjectById
 } from '@/lib/db/queries';
 import { generateQuestions, generateDocuments } from '@/lib/ai/document-generator';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
 export async function generateAIQuestions(projectDescription: string) {
   try {

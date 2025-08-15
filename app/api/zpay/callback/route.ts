@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function verifyZPaySign(data: Record<string, any>): boolean {
+function verifyZPaySign(data: Record<string, string | FormDataEntryValue>): boolean {
   // 实现ZPay签名验证逻辑
   // 这里需要根据ZPay文档实现具体的验证算法
   return true; // 暂时返回true，需要实际实现
